@@ -23,7 +23,6 @@ public class MoveToPlayer : MonoBehaviour
         }
         //PlayerPosition = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.x);
         //this.gameObject.transform.LookAt(PlayerPosition);
-
         this.gameObject.transform.LookAt(Player.transform);
         rb.AddForce(transform.forward * speed);
     }

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class DestoryEnemy : MonoBehaviour
 {
-    public int score;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,5 +14,13 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag != "Player")
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
     }
 }

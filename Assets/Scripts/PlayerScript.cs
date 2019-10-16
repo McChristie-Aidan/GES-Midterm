@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -10,16 +11,22 @@ public class PlayerScript : MonoBehaviour
     public float CooldownTime = 1f;
     public GameObject projectilePrefab;
     public bool Cooldown;
+    public int health;
 
     // Start is called before the first frame update
     void Start()
     {
         Cooldown = false;
+        health = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Backspace) || this.health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
         // keep player in the midle
         if(transform.position.x < -xRange)
         {
@@ -41,6 +48,11 @@ public class PlayerScript : MonoBehaviour
         //{
         //    Debug.Log("Player is moving left");
         //}
+
+        if (this.health <= 0)
+        {
+            this.enabled = false;
+        }
         if (Cooldown == false)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -50,7 +62,29 @@ public class PlayerScript : MonoBehaviour
                 Invoke("EndCooldown", CooldownTime);
             }
         }
+        Debug.Log($"Health: {this.health}");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Enemy")
+        {
+            Debug.Log("collided with enemy");
+            this.health = health - 1;
+            Destroy(other.gameObject);
+        }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.transform.tag == "Enemy")
+    //    {
+    //        Debug.Log("collided with enemy");
+    //        this.health = health - 1;
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
+
     public void EndCooldown()
     {
         Cooldown = false;
