@@ -9,17 +9,23 @@ public class HealthManager : MonoBehaviour
     Text text;
     PlayerScript player;
     int Health;
+    GameObject playerObject;
+    private void Awake()
+    {
+        playerObject = GameObject.Find("Player");
+        player = playerObject.GetComponent<PlayerScript>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<PlayerScript>();
-        text = GetComponent<Text>();
-        int Health = player.health;
+        text = this.GetComponent<Text>();
+        Health = player.health;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Health = player.health;
         text.text = "Health: " + Health;
     }
 }
