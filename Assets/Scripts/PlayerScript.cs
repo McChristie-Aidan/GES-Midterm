@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemy")
+        if (other.transform.tag != "Player" || other.transform.tag == null)
         {
             Debug.Log("collided with enemy");
             this.health = health - 1;
