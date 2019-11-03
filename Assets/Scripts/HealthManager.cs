@@ -10,28 +10,36 @@ public class HealthManager : MonoBehaviour
     public int health;
     int maxHealth = 3;
     GameObject player;
+
+    //technical debt this should be somewhere else
+    [SerializeField] GameObject gameOver;
+    [SerializeField] GameObject spawner;
+    SpawnManager spawnManager;
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         text = this.GetComponent<Text>();
         player = GameObject.Find("Player");
+        spawnManager = spawner.GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
     void Update()
+    {        
+        text.text = "Health: " + health;
+        CheckForDeath();
+    }
+
+    // technical debt should be its own class
+    public void CheckForDeath()
     {
-        //disable the player if they run out of lives
-        if (this.health <= 0)
-        {
-            player.SetActive(false);
-        }
-        // reloads the scene if the player dies
-        // technical debt should be its own class
         if (Input.GetKeyDown(KeyCode.Backspace) || this.health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            player.SetActive(false);
+            gameOver.SetActive(true);
+            spawnManager.CancelInvoke();
+            spawner.SetActive(false);
         }
-        text.text = "Health: " + health;
     }
 }

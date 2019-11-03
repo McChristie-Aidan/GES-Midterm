@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveToPlayer : MonoBehaviour
 {
-    GameObject Player = null;
+    GameObject Player;
     Vector3 PlayerPosition;
     public float speed = 30f;
     Rigidbody rb;
@@ -21,15 +21,13 @@ public class MoveToPlayer : MonoBehaviour
         {
             Player = GameObject.FindGameObjectWithTag("Player");
         }
-        //PlayerPosition = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.x);
-        //this.gameObject.transform.LookAt(PlayerPosition);
+        if (Player == null)
+        {
+            Destroy(this.gameObject);
+        }
+        
         this.gameObject.transform.LookAt(Player.transform);
         rb.AddForce(transform.forward * speed);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
     }
 }

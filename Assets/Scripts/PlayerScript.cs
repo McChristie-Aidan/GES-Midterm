@@ -11,12 +11,15 @@ public class PlayerScript : MonoBehaviour
     public float CooldownTime = 1f;
     public GameObject projectilePrefab;
     public bool Cooldown;
+
     GameObject healthManager;
     HealthManager health;
+    AudioPlayer audio;
 
     // Start is called before the first frame update
     void Start()
     {
+        audio = GetComponent<AudioPlayer>();
         healthManager = GameObject.Find("Health");
         health = healthManager.GetComponent<HealthManager>();
         Cooldown = false;
@@ -58,8 +61,7 @@ public class PlayerScript : MonoBehaviour
                 Invoke("EndCooldown", CooldownTime);
             }
         }
-        //debug Health
-        //Debug.Log($"Health: {this.health}");
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,6 +71,7 @@ public class PlayerScript : MonoBehaviour
         {
             //debug player collision
             //Debug.Log("collided with enemy");
+            audio.PlayAudio();
             health.health -= 1;
             Destroy(other.gameObject);
         }

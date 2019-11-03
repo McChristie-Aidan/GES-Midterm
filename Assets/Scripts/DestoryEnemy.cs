@@ -6,21 +6,28 @@ public class DestoryEnemy : MonoBehaviour
 {
     GameObject scoreManager;
     ScoreManager score;
+    AudioPlayer audio;
+    BoxCollider box;
+    public Renderer rend;
     private void Awake()
     {
+        box = GetComponent<BoxCollider>();
+        box.enabled = true;
+        audio = GetComponent<AudioPlayer>();
         scoreManager = GameObject.Find("Score");
         score = scoreManager.GetComponent<ScoreManager>();
-    }
-    public void Start()
-    {
-        
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.transform.tag == "Enemy")
         {
-            Destroy(gameObject);
+            box.enabled = false;
+            audio.PlayAudio();
+            rend.enabled = false;
+            Destroy(gameObject, audio.clip.length);
             Destroy(other.gameObject);
             score.score += 10;
         }

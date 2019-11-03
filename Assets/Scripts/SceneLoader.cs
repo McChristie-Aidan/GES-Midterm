@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-
     public void LoadGameScene()
     {
         SceneManager.LoadScene("Prototype 2");
     }
 
+    public void LoadMenuScene()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
