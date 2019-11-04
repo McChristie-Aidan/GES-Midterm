@@ -17,6 +17,6 @@ public class FinalScore : MonoBehaviour
 
     void Update()
     {
-        text.text = $"You're score is {scoreManager.score}";
+        text.text = $"You scored {scoreManager.score} points!";
     }
 }

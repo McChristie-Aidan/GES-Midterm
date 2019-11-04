@@ -8,10 +8,6 @@ public class MoveToPlayer : MonoBehaviour
     Vector3 PlayerPosition;
     public float speed = 30f;
     Rigidbody rb;
-    private void Awake()
-    {
-        
-    }
 
     // Start is called before the first frame update
     void Start()
