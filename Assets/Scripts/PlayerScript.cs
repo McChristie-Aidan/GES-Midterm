@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum PlayerState
+{
+    Playing,
+    Invincible,
+    Dead
+}
+
 public class PlayerScript : MonoBehaviour
 {
+    private PlayerState playerState;
     public float horizontalInput;
     public float speed = 10.0f;
     public float xRange = 10;
     public float CooldownTime = 1f;
-    public GameObject projectilePrefab;
+    
     public bool Cooldown;
+    public float invincibleTime;
 
+    public GameObject projectilePrefab;
     GameObject healthManager;
     HealthManager health;
     AudioPlayer audio;
@@ -19,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerState playerState = PlayerState.Playing;
         audio = GetComponent<AudioPlayer>();
         healthManager = GameObject.Find("Health");
         health = healthManager.GetComponent<HealthManager>();
@@ -66,14 +77,19 @@ public class PlayerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //if player collides with an enemy the take damage.
-        if (other.transform.tag != "Player" || other.transform.tag == null)
+        if (playerState != PlayerState.Invincible)
         {
-            //debug player collision
-            //Debug.Log("collided with enemy");
-            audio.PlayAudio();
-            health.health -= 1;
-            Destroy(other.gameObject);
+            //if player collides with an enemy the take damage.
+            if (other.transform.tag != "Player" || other.transform.tag == null)
+            {
+                //debug player collision
+                //Debug.Log("collided with enemy");
+                audio.PlayAudio();
+                health.health -= 1;
+                playerState = PlayerState.Invincible;
+                Invoke("EndInvincibilty", invincibleTime);
+                Destroy(other.gameObject);
+            }
         }
     }
 
@@ -82,4 +98,10 @@ public class PlayerScript : MonoBehaviour
     {
         Cooldown = false;
     }
+
+    public void EndInvicibility()
+    {
+        playerState = PlayerState.Playing;
+    }
+
 }

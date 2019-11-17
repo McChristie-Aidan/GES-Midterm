@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] animalPrefabs;
+    List<GameObject> enemies;
     public float spawnRangeX = 10;
     public float spawnPosZ = 20;
     public float startDelay = 2;
@@ -14,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemies = new List<GameObject>();
         InvokeRepeating("spawnRandomAnimal", startDelay, spawnRate);
     }
 
