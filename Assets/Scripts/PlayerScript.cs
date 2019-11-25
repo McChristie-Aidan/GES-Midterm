@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviour
     public float speed = 10.0f;
     public float xRange = 10;
     public float CooldownTime = 1f;
+    public float flashSpeed;
     
     public bool Cooldown;
     public float invincibleTime;
@@ -25,6 +26,10 @@ public class PlayerScript : MonoBehaviour
     GameObject healthManager;
     HealthManager health;
     AudioPlayer audio;
+    MeshRenderer[] meshRenderers;
+    
+    Color hurtColor;
+    List<Color> normalColors;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +39,17 @@ public class PlayerScript : MonoBehaviour
         healthManager = GameObject.Find("Health");
         health = healthManager.GetComponent<HealthManager>();
         Cooldown = false;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        normalColors = new List<Color>();
+
+        hurtColor = Color.red;
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            for (int j = 0; j < meshRenderers[i].materials.Length; j++)
+            {
+                normalColors.Add(meshRenderers[i].materials[j].color);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -75,21 +91,49 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    //technical debt should probably be in its own class
+    private IEnumerable HurtFlash()
+    {
+        for (;;)
+        {
+            for(int i = 0; i < meshRenderers.Length; i++)
+            {
+                for (int j = 0; j < meshRenderers[i].materials.Length; j++)
+                {
+                    meshRenderers[i].materials[j].color = hurtColor;
+                }
+            }
+            
+            yield return new WaitForSeconds(flashSpeed);
+
+            for (int i = 0; i < meshRenderers.Length; i++)
+            {
+                for (int j = 0; j < meshRenderers[i].materials.Length; j++)
+                {
+                    meshRenderers[i].materials[j].color = normalColors[j];
+                }
+            }
+
+            yield return new WaitForSeconds(flashSpeed);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (playerState != PlayerState.Invincible)
-        {
             //if player collides with an enemy the take damage.
-            if (other.transform.tag != "Player" || other.transform.tag == null)
+        if (other.transform.tag != "Player" || other.transform.tag == null)
+        {
+            //debug player collision
+            //Debug.Log("collided with enemy");
+            if (playerState != PlayerState.Invincible)
             {
-                //debug player collision
-                //Debug.Log("collided with enemy");
                 audio.PlayAudio();
                 health.health -= 1;
                 playerState = PlayerState.Invincible;
-                Invoke("EndInvincibilty", invincibleTime);
-                Destroy(other.gameObject);
+                Invoke("EndInvicibility", invincibleTime);
+                StartCoroutine("HurtFlash");
             }
+            Destroy(other.gameObject);
         }
     }
 
@@ -102,6 +146,7 @@ public class PlayerScript : MonoBehaviour
     public void EndInvicibility()
     {
         playerState = PlayerState.Playing;
+        StopCoroutine("HurtFlash");
     }
 
 }
