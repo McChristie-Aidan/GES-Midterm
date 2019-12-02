@@ -24,6 +24,7 @@ public class MoveToPlayer : MonoBehaviour
         
         this.gameObject.transform.LookAt(Player.transform);
         rb.AddForce(transform.forward * speed);
+        rb.AddTorque(new Vector3(5, 5, 5));
         
     }
 }

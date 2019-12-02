@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ac61420014a8846a0e882290495e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyBullet: {fileID: 4843767871971928661, guid: 3cc55474e8bb15f4aa39f64011109567,
+    type: 3}
   rend: {fileID: 0}
 --- !u!82 &4169893557357575140
 AudioSource:
@@ -164,7 +166,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2a6856a52b0c3b3489192cde4b47398c, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.694
+  m_Volume: 0.487
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -274,7 +276,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 77f908121fa9c7949b6c7da646a4e321, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.808
+  m_Volume: 0.535
   m_Pitch: 1
   Loop: 0
   Mute: 0

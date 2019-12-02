@@ -11,14 +11,11 @@ public class ShotManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InvokeRepeating("Shoot", shootDelay, shootRate);
-        Invoke("Shoot", shootDelay);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (this.transform.tag != "UFO")
+        {
+            //InvokeRepeating("Shoot", shootDelay, shootRate);
+            Invoke("Shoot", shootDelay);
+        }
     }
 
     void Shoot()

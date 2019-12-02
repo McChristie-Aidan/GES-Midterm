@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestoryEnemy : MonoBehaviour
 {
+    //technical debt i should put this somewhere else its just faster to do it here.
+    [SerializeField] GameObject enemyBullet;
     GameObject scoreManager;
     ScoreManager score;
     AudioPlayer audio;
@@ -27,6 +29,7 @@ public class DestoryEnemy : MonoBehaviour
             box.enabled = false;
             audio.PlayAudio();
             rend.enabled = false;
+
             Destroy(gameObject, audio.clip.length);
             Destroy(other.gameObject);
             score.score += 10;

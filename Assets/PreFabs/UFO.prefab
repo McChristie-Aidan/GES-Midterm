@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1410114271098278511}
   - component: {fileID: 416566425782201924}
   - component: {fileID: -1384991194464555023}
+  - component: {fileID: -6497888970367606118}
   m_Layer: 0
   m_Name: UFO
   m_TagString: UFO
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aaaf89a3e723f1429de2e1d1f24c2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4.25
+  speed: 4
 --- !u!114 &662188045937036755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,8 +93,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 32.02274, y: 20.804762, z: 32.391228}
-  m_Center: {x: 0.1869864, y: 4.6625667, z: -0.4076898}
+  m_Size: {x: 28.132507, y: 17.986965, z: 27.167192}
+  m_Center: {x: 0.33999017, y: 6.071469, z: -0.29798612}
 --- !u!114 &416566425782201924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,8 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShotPrefab: {fileID: 4843767871971928661, guid: 3cc55474e8bb15f4aa39f64011109567,
     type: 3}
-  shootDelay: 0.37
-  shootRate: 1.6
+  shootDelay: 0
+  shootRate: 0
 --- !u!54 &-1384991194464555023
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,6 +127,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-6497888970367606118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2672782683832539680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37cd2d7a945bc854885cabf9a8bac068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBullet: {fileID: 4843767871971928661, guid: 3cc55474e8bb15f4aa39f64011109567,
+    type: 3}
 --- !u!1001 &7266663666826930993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,11 +148,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2672782683832101900}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e203069520b7dc842a1293bb00a1f110,
-        type: 3}
-      propertyPath: m_Name
-      value: Low_Poly_UFO_001
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e203069520b7dc842a1293bb00a1f110,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,6 +217,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e203069520b7dc842a1293bb00a1f110,
+        type: 3}
+      propertyPath: m_Name
+      value: Low_Poly_UFO_001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e203069520b7dc842a1293bb00a1f110, type: 3}
