@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadGameScene()
+    public void LoadLevel3()
     {
-        SceneManager.LoadScene("Prototype 2");
+        SceneManager.LoadScene("Level3");
     }
 
     public void LoadMenuScene()

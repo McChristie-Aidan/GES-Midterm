@@ -22,7 +22,7 @@ public class DestoryEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Enemy")
+        if (other.transform.tag != "Player" || other.transform.tag == null)
         {
             box.enabled = false;
             audio.PlayAudio();

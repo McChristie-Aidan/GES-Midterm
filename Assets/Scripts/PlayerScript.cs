@@ -24,12 +24,11 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject projectilePrefab;
     GameObject healthManager;
+    GameObject hurtShield;
     HealthManager health;
     AudioPlayer audio;
-    MeshRenderer[] meshRenderers;
-    
-    Color hurtColor;
-    List<Color> normalColors;
+    HurtFlash hurtFlash;
+    IEnumerator Flash;
 
     // Start is called before the first frame update
     void Start()
@@ -38,18 +37,11 @@ public class PlayerScript : MonoBehaviour
         audio = GetComponent<AudioPlayer>();
         healthManager = GameObject.Find("Health");
         health = healthManager.GetComponent<HealthManager>();
+        hurtShield = GameObject.Find("HurtShield");
+        hurtFlash = hurtShield.GetComponent<HurtFlash>();
         Cooldown = false;
-        meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        normalColors = new List<Color>();
 
-        hurtColor = Color.red;
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            for (int j = 0; j < meshRenderers[i].materials.Length; j++)
-            {
-                normalColors.Add(meshRenderers[i].materials[j].color);
-            }
-        }
+        Flash = hurtFlash.Flash();
     }
 
     // Update is called once per frame
@@ -91,33 +83,6 @@ public class PlayerScript : MonoBehaviour
 
     }
 
-    //technical debt should probably be in its own class
-    private IEnumerable HurtFlash()
-    {
-        for (;;)
-        {
-            for(int i = 0; i < meshRenderers.Length; i++)
-            {
-                for (int j = 0; j < meshRenderers[i].materials.Length; j++)
-                {
-                    meshRenderers[i].materials[j].color = hurtColor;
-                }
-            }
-            
-            yield return new WaitForSeconds(flashSpeed);
-
-            for (int i = 0; i < meshRenderers.Length; i++)
-            {
-                for (int j = 0; j < meshRenderers[i].materials.Length; j++)
-                {
-                    meshRenderers[i].materials[j].color = normalColors[j];
-                }
-            }
-
-            yield return new WaitForSeconds(flashSpeed);
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
             //if player collides with an enemy the take damage.
@@ -131,7 +96,7 @@ public class PlayerScript : MonoBehaviour
                 health.health -= 1;
                 playerState = PlayerState.Invincible;
                 Invoke("EndInvicibility", invincibleTime);
-                StartCoroutine("HurtFlash");
+                hurtFlash.StartCoroutine(Flash);
             }
             Destroy(other.gameObject);
         }
@@ -146,7 +111,8 @@ public class PlayerScript : MonoBehaviour
     public void EndInvicibility()
     {
         playerState = PlayerState.Playing;
-        StopCoroutine("HurtFlash");
+        hurtFlash.StopCoroutine(Flash);
+        hurtFlash.SetColor(new Color(1f, 0f, 0f, 0f));
     }
 
 }
