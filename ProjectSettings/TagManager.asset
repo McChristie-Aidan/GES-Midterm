@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - UFO
+  - Speeder
+  - Rocket
   layers:
   - Default
   - TransparentFX

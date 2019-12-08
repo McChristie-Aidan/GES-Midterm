@@ -23,9 +23,7 @@ public class PlayerScript : MonoBehaviour
     public float invincibleTime;
 
     public GameObject projectilePrefab;
-    GameObject healthManager;
     GameObject hurtShield;
-    HealthManager health;
     AudioPlayer audio;
     HurtFlash hurtFlash;
     IEnumerator Flash;
@@ -35,8 +33,6 @@ public class PlayerScript : MonoBehaviour
     {
         PlayerState playerState = PlayerState.Playing;
         audio = GetComponent<AudioPlayer>();
-        healthManager = GameObject.Find("Health");
-        health = healthManager.GetComponent<HealthManager>();
         hurtShield = GameObject.Find("HurtShield");
         hurtFlash = hurtShield.GetComponent<HurtFlash>();
         Cooldown = false;
@@ -93,7 +89,7 @@ public class PlayerScript : MonoBehaviour
             if (playerState != PlayerState.Invincible)
             {
                 audio.PlayAudio();
-                health.health -= 1;
+                ScoreManager.health -= 1;
                 playerState = PlayerState.Invincible;
                 Invoke("EndInvicibility", invincibleTime);
                 hurtFlash.StartCoroutine(Flash);
