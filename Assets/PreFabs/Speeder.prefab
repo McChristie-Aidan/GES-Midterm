@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aaaf89a3e723f1429de2e1d1f24c2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6.8
+  speed: 5.8
 --- !u!114 &1111083604549543631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +142,7 @@ MonoBehaviour:
   enemyBullet: {fileID: 0}
   min: 2
   max: 3
+  moveDistance: 6
 --- !u!1001 &256116209893306292
 PrefabInstance:
   m_ObjectHideFlags: 0

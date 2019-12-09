@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField] GameObject gameOver;
+    GameObject gameOver;
+    GameObject deathScreen;
     // Start is called before the first frame update
     void Start()
     {
-        gameOver.SetActive(false);      
+        gameOver = this.gameObject;
+        deathScreen = GameObject.Find("DeathScreen");
+        deathScreen.SetActive(false);
     }
 
-    public void ShowGameOver()
+    public void Update()
     {
-            gameOver.SetActive(true);
+        if (ScoreManager.health <= 0 || Input.GetKeyDown(KeyCode.Backspace))
+        {
+            deathScreen.SetActive(true);
+        }
     }
 }

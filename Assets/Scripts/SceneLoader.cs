@@ -10,7 +10,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevelAfterKills (int targetLevel, int targetKills)
     {
-        if (targetKills >= ScoreManager.enemiesKilled)
+        if (ScoreManager.enemiesKilled >= targetKills)
         {
             switch (targetLevel)
             {
@@ -37,21 +37,31 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevel1()
     {
+        ScoreManager.health = 3;
+        ScoreManager.enemiesKilled = 0;
+        ScoreManager.score = 0;
         SceneManager.LoadScene("Level1");
     }
 
     public void LoadLevel2()
     {
+        ScoreManager.health = 3;
+        ScoreManager.enemiesKilled = 0;
         SceneManager.LoadScene("Level2");
     }
 
     public void LoadLevel3()
     {
+        ScoreManager.health = 3;
+        ScoreManager.enemiesKilled = 0;
         SceneManager.LoadScene("Level3");
     }
 
     public void LoadMenuScene()
     {
+        ScoreManager.health = 3;
+        ScoreManager.enemiesKilled = 0;
+        ScoreManager.score = 0;
         SceneManager.LoadScene("Menu");
     }
 }

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aaaf89a3e723f1429de2e1d1f24c2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 3.5
 --- !u!114 &662188045937036755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBullet: {fileID: 4843767871971928661, guid: 3cc55474e8bb15f4aa39f64011109567,
     type: 3}
+  min: 2
+  max: 3
+  moveDistance: 0
 --- !u!1001 &7266663666826930993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -148,6 +151,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2672782683832101900}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: e203069520b7dc842a1293bb00a1f110,
+        type: 3}
+      propertyPath: m_Name
+      value: Low_Poly_UFO_001
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e203069520b7dc842a1293bb00a1f110,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,11 +225,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: e203069520b7dc842a1293bb00a1f110,
-        type: 3}
-      propertyPath: m_Name
-      value: Low_Poly_UFO_001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e203069520b7dc842a1293bb00a1f110, type: 3}

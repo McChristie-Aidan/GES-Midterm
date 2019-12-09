@@ -8,11 +8,13 @@ public class SpecialEnemyBehavior : MonoBehaviour
     Vector3 currentLocation;
     public float min = 2f;
     public float max = 3f;
-
-    private void Start()
+    [SerializeField] public float moveDistance;
+    Random r;
+    
+    void Start()
     {
         min = transform.position.x;
-        max = transform.position.x + 4;
+        max = transform.position.x + moveDistance;
     }
 
     // Update is called once per frame
@@ -20,7 +22,7 @@ public class SpecialEnemyBehavior : MonoBehaviour
     {
         if (this.transform.tag == "Speeder")
         {
-            transform.position = new Vector3(Mathf.PingPong(Time.time * 2, max - min) + min, transform.position.y, transform.position.z);
+            transform.position = new Vector3(Mathf.PingPong(Time.time * 3, max - min) + min, transform.position.y, transform.position.z);
         }
     }
 

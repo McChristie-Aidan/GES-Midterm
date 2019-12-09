@@ -24,7 +24,18 @@ public class DestoryEnemy : MonoBehaviour
             if (other.transform.tag == "Speeder" || other.transform.tag == "UFO" || other.transform.tag == "Rocket")
             {
                 ScoreManager.enemiesKilled += 1;
-                ScoreManager.score += 10;
+                switch(other.transform.tag)
+                {
+                    case "Speeder":
+                        ScoreManager.score += 15;
+                        break;
+                    case "UFO":
+                        ScoreManager.score += 10;
+                        break;
+                    case "Rocket":
+                        ScoreManager.score += 10;
+                        break;
+                }
             }
             if (other.transform.tag == "Enemy")
             {
